@@ -1,0 +1,8 @@
+node_modules
+dist
+build
+.vscode
+coverage
+*.min.js
+.next
+out
