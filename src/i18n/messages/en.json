@@ -110,6 +110,10 @@
   "back":"Back",
   "next":"Next",
   "computer-engineering":"Computer Engineering",
-  "term":"Term"
+  "term":"Term",
+  "select-role":"Select Role",
+  "username-label":"User Name",
+  "track-req":"Track is required"
+  
  
 }

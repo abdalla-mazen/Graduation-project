@@ -5,7 +5,7 @@ import { RegisterValues } from "@/lib/schemas/auth.schema";
 
 export async function registerAction(data: RegisterValues) {
   try {
-    const response = await fetch(`${process.env.API}/auth/signup`, {
+    const response = await fetch(`${process.env.API}/auth/register`, {
       method: "POST",
       headers: JSON_HEADER,
       body: JSON.stringify(data),

@@ -19,6 +19,9 @@ import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import GoogleSignInButton from "@/components/shared/google-button";
 import FacebookLoginButton from "@/components/shared/facebook-button";
+import useLogin from "../_hooks/use-login";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { LoaderCircle } from "lucide-react";
 
 export default function LoginForm() {
   // Translation
@@ -32,24 +35,25 @@ export default function LoginForm() {
     mode: "onSubmit",
     reValidateMode: "onChange",
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
     resolver: zodResolver(schema),
   });
 
   // Hooks
-  // const { isPending, login, error } = useLogin();
+  const { login, error, isPending } = useLogin();
 
   // Functions
   const onSubmitHandler: SubmitHandler<LoginFormInput> = (values) => {
     console.log(values);
+    login(values);
   };
 
   // Effect
   useEffect(() => {
     const timerId = setTimeout(() => {
-      form.setFocus("email");
+      form.setFocus("username");
     }, 0);
 
     return () => clearTimeout(timerId);
@@ -62,14 +66,14 @@ export default function LoginForm() {
           {/* Email form field */}
           <FormField
             control={form.control}
-            name="email"
+            name="username"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="font-medium text-sm capitalize text-blue-500 ">
-                  {t("email-label")}
+                  {t("username-label")}
                 </FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="user@example.com" {...field} />
+                  <Input type="text" placeholder="Abdallah" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -92,7 +96,11 @@ export default function LoginForm() {
               </FormItem>
             )}
           />
-
+          {error && (
+            <Alert className="text-center mb-4 text-red-500 border border-red-500 dark:text-softPink-300">
+              <AlertDescription>{error.message}</AlertDescription>
+            </Alert>
+          )}
           {/* Forgot password */}
           <div className="flex flex-col items-center space-y-6 pt-2">
             <div className="w-full rtl:text-start text-end">
@@ -104,10 +112,10 @@ export default function LoginForm() {
             {/* Submit button */}
             <Button
               type="submit"
-              disabled={form.formState.isSubmitted && !form.formState.isValid}
+              disabled={isPending || (form.formState.isSubmitted && !form.formState.isValid)}
               className="w-full bg-blue-600 text-white hover:bg-blue-700"
             >
-              {t("login-button")}
+              {isPending ? <LoaderCircle className="animate-spin" /> : t("login-button")}
             </Button>
             <div className=" flex flex-col sm:flex-row w-full items-center justify-between pt-2 gap-2">
               <GoogleSignInButton className=" w-full" />

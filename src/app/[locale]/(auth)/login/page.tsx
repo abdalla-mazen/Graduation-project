@@ -7,6 +7,7 @@ export default function LoginPage() {
 
   return (
     <div className="mt-10 p-4 max-w-[25.5rem]  datk:bg-zinc-700">
+
       <h1 className="text-5xl font-bold text-black dark:text-white  text-center mb-10 ">{t("login-now")}</h1>
       <LoginForm />
     </div>
