@@ -6,8 +6,8 @@ export const useLoginFormSchema = () => {
   const t = useTranslations();
 
   const schema = z.object({
-    email: z
-      .email(t("validation.email.invalid"))
+    username: z
+      .string()
       .min(1, t("validation.email.required")),
     password: z.string().min(1, t("validation.password.required")),
   });

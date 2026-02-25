@@ -8,7 +8,7 @@ export default function Page() {
   const t = useTranslations();
 
   return (
-    <main className="text-center">
+    <main className="">
       {/* Register title */}
       <h1 className="text-5xl font-bold text-black dark:text-white text-center mb-10 ">
         {t("register")}
@@ -18,7 +18,7 @@ export default function Page() {
       <RegisterForm />
 
       {/* Register meassage , login link */}
-      <Link href={"/login"} className="text-white mt-2 block">
+      <Link href={"/login"} className="text-blue-600 font-bold mt-2 block">
         {t("register-mess")}
         <span className="text-blue-600 font-bold ">{t("login")}</span>{" "}
       </Link>

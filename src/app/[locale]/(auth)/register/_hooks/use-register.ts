@@ -1,4 +1,4 @@
-"use client";
+
 
 import { RegisterValues } from "@/lib/schemas/auth.schema";
 import { useMutation } from "@tanstack/react-query";
@@ -13,8 +13,12 @@ export default function useRegister() {
         throw new Error(response.error);
       }
 
+      if ("ok" in response) {
+        if (response?.ok) {
+          location.href = "/login";
+        }
+      }
       // return response;
-      location.href = "/login";
 
       return response;
     },
