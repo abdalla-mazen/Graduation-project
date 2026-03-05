@@ -1,17 +1,16 @@
 
 import React from 'react'
 import { Progress } from "@/components/ui/progress"
-
-import { Button } from '@/components/ui/button'
-import { Bookmark } from 'lucide-react';
-import Link from 'next/link';
 import { SidebarProvider, SidebarTrigger  } from "@/components/ui/sidebar"
 import Navbar from '@/components/layout/header/navbar';
 import { AppSidebar } from '@/components/layout/Appsidebar';
-import Slider from '@/components/shared/slider';
+import Image from 'next/image';
+import CircleProgress from "@/components/ui/circleProgress"
+
 
 export default function page() {
-  const value = 60
+  const value = 71
+  const valueCircle = 75 
   return <>
   <Navbar/>
   <div className="contain relative mt-16">
@@ -21,70 +20,78 @@ export default function page() {
       <SidebarTrigger/>
     </SidebarProvider>
     </div>
-  <div className="slider">
-    <Slider/>
-  </div>
-    <div className=" w-[90%] mx-auto my-5 ">
-      <p className='font-bold text-2xl'>Hi, Welcome back</p>
-      <p className='font-bold text-secondaryColor dark:text-secondaryColordark'>Are you ready to learn easier?</p>
+
+    <div className=" w-[80%] mx-auto mt-24 ">
+      <p className='font-bold text-2xl'>Welcome back, <span className='text-mainColor'>Ahmed</span></p>
+      <p className='font-bold text-secondaryColor dark:text-secondaryColordark'>Ready to continue your learning journey?</p>
     </div>
-  <div className="down w-[90%] mx-auto flex flex-col lg:flex-row gap-10 ">
-    
-    <div className="left lg:w-2/3  order-2 lg:order-1">
-   
-      <div className="progress shadow-2xl rounded-lg  pb-2 px-5">
-        <div className="info flex justify-between">
-          <span className='font-bold'>AI track progress</span>
-          <span>{`${value}%`}</span>
+    <div className='w-[80%] mx-auto mt-10 font-bold text-xl'>
+      <span >Continue learning</span>
+      <div className='flex flex-col md:flex-row gap-5 mt-5 '>
+        <div className='flex flex-col gap-3 w-full md:w-2/3'>
+          <div className=" flex gap-5 p-4 shadow-lg rounded-lg">
+        <div>
+          <Image src="/images/sql.jpg" alt='sql' width={140} height={140} className='rounded-lg'/>
         </div>
-        <Progress value={value} className='my-2' />
-        <span className='dark:text-secondaryColordark'>Keep up the great work!</span>
-      </div>
-
-
-
-
-      <div>
-        <div className="line flex justify-between items-center my-5">
-        <span className='font-semibold text-2xl'>What’s New?</span>
-        <span className='font-bold text-mainColor text-md'>See All</span>
-        </div>
-
-
-
-        <div className="box rounded-lg shadow-2xl flex justify-between p-5">
-          <div className="left w-1/2 flex flex-col  justify-between">
-            <div>
-            <p className='font-bold text-xs sm:text-lg'>Product Design Entern</p>
-            <span className='text-secondaryColor dark:text-secondaryColordark'>Innovate CO.</span>
-            </div>
-            <div className='flex gap-2 items-center'>
-            <Button className='bg-mainColor py-5 px-12 dark:text-whiteColor'>Apply</Button>
-            <Bookmark className='text-secondaryColor dark:text-secondaryColordark'/>
-            </div>
-          </div>
-
-
-
-          <div className="right w-1/2 flex flex-col items-end">
-            <div className="image w-2/3 sm:w-1/3">
-              <img className='w-full mb-2' src="/images/sky.jpg" alt="sky" />
-            </div >
-            <div className="bg-tertiaryColor font-bold text-mainColor w-fit px-5 lg:px-10 rounded-lg py-2">Match 75%</div>
+        <div className='w-full'>
+          <div className='flex flex-col gap-3'>
+            <p className='font-bold'>SQL Database with Postgre</p>
+            <span className='text-secondaryColor text-sm'>Udemy</span>
+            <Progress value={value}  />
+            <p className='text-secondaryColor text-sm'><span className='text-black'>{value}</span> % I 22 / 30 lessons</p>
           </div>
         </div>
       </div>
+
+       <div className=" flex gap-5 p-4 shadow-lg rounded-lg">
+        <div>
+          <Image src="/images/python.jpg" alt='sql' width={140} height={140} className='rounded-lg'/>
+        </div>
+        <div className='w-full'>
+          <div className='flex flex-col gap-3'>
+            <p className='font-bold'>SQL Database with Postgre</p>
+            <span className='text-secondaryColor text-sm'>Udemy</span>
+            <Progress value={value}  />
+            <p className='text-secondaryColor text-sm'><span className='text-black'>{value}</span> % I 22 / 30 lessons</p>
+          </div>
+        </div>
+      </div>
+        </div>
+        
+      <div className="w-full md:w-1/3 shadow-lg flex flex-col justify-center items-center gap-3 rounded-lg">
+      <span>Progress</span>
+      <CircleProgress/>
+      <ul className=' text-mainColor text-sm'>
+        <li><span>43</span> hours learned</li>
+        <li><span>2</span> courses completed</li>
+        <li><span>44</span> lessons completed</li>
+      </ul>
+      </div>
+      </div>
     </div>
-    <div className="right lg:w-1/3 order-1 lg:order-2">
-     <span className='font-bold text-2xl'>Quick Actions</span>
-    <div className=" flex lg:flex-wrap gap-2 text-center text-[12px] sm:text-lg text-whiteColor my-5 font-bold">
-      <Link href={""} className="w-1/4 lg:w-1/3 bg-mainColor py-5 sm:py-10 rounded-lg  ">Learning plan</Link>
-      <Link href={""} className="w-1/4 lg:w-1/3 bg-mainColor py-5 sm:py-10 rounded-lg">Courses</Link>
-      <Link href={"/assessment/rules"} className="w-1/4 lg:w-1/3 bg-mainColor py-5 sm:py-10 rounded-lg">Assessments</Link>
-      <Link href={""} className="w-1/4 lg:w-1/3 bg-mainColor py-5 sm:py-10 rounded-lg">CV Coach</Link>
-     </div>
+
+    <div className='mt-10 w-[80%] h-64 relative mx-auto'>
+      <Image src="/images/education.png" alt='education' fill/>
     </div>
-  </div>
+
+    <div className='flex flex-col md:flex-row gap-10 w-[80%] mx-auto my-10 '>
+      <div className='flex flex-col gap-2 w-full md:w-1/3 text-center' >
+        <p className='text-mainColor font-bold'>Nexus</p>
+        <p className=''>Unleash your potential with our comprehensive learning platform - designed to help, engage, and equip everyone with the skills and knowledge needed to succeed in a constantly changing world.</p>
+      </div>
+      <div className='flex flex-col gap-2 w-full md:w-1/3 text-center'>
+        <span className='font-bold'>Courses</span>
+        <ul>
+          <li>UI/UX Design</li>
+          <li>Data Engineer</li>
+          <li>Machine Learning</li>
+        </ul>
+      </div>
+      <div className='flex flex-col gap-2 w-full md:w-1/3 text-center'>
+       <span className='font-bold'>Support</span>
+       <span>Help Center</span>
+      </div>
+    </div>
   </div>
   </>
 }
