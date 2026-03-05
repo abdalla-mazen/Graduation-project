@@ -20,7 +20,7 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         // keeps a neutral default using design tokens
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: "bg-primary text-primary-foreground ",
 
         // your palette (maroon/softPink) for primary/secondary
         primary:
