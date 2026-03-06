@@ -11,6 +11,7 @@ import localFont from "next/font/local";
 import Providers from "@/components/providers";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
+import Navbar from "@/components/layout/header/navbar";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -85,6 +86,7 @@ export default async function LocaleLayout({
       >
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Providers>
+            <Navbar />
             {children}
             <Toaster />
           </Providers>

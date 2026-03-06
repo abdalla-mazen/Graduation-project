@@ -16,7 +16,7 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white dark:bg-black shadow-md z-50">
+    <nav className="relative top-0 left-0 w-full bg-white dark:bg-black shadow-md z-50">
       <div className=" w-[90%] mx-auto flex items-center justify-between py-4">
         
         {/* Logo */}
