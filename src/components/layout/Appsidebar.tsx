@@ -14,6 +14,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { Switch } from "../ui/switch"
+import { Link } from "@/i18n/navigation"
 
 // Menu items.
 const items = [
@@ -44,7 +45,7 @@ const items = [
   },
    {
     title: "CV Coach",
-    url: "#",
+    url: "/cv",
     icon: FileUser,
   },
    {
@@ -59,12 +60,12 @@ const items = [
   },
    {
     title: "Job Description",
-    url: "#",
+    url: "/Linkedin/Posts",
     icon: BriefcaseBusiness,
   },
    {
     title: "LindedIn jobs",
-    url: "#",
+    url: "/Linkedin/Jobs",
     icon: Linkedin,
   },
    {
@@ -101,10 +102,10 @@ export function AppSidebar() {
               {items.map((item) =>(
                 <SidebarMenuItem key={item.title} >
                   <SidebarMenuButton  asChild>
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
