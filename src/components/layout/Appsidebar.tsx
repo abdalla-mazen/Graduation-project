@@ -60,7 +60,7 @@ const items = [
   },
    {
     title: "Job Description",
-    url: "/Linkedin/Posts",
+    url: "/Linkedin/posts",
     icon: BriefcaseBusiness,
   },
    {
