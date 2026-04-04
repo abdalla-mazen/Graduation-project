@@ -42,7 +42,7 @@ export default async function GetPosts() {
 
   return (
     <div className="flex flex-col gap-3">
-      {Jobs.map((job, index) => (
+      {Jobs?.map((job, index) => (
         <div
           key={index}
           className="group bg-white border border-slate-200 hover:border-[#0077B5]/40 rounded-2xl p-5 shadow-sm hover:shadow-md hover:shadow-blue-100/50 transition-all duration-250"
