@@ -1,8 +1,11 @@
 import AuthToggleLocale from "@/components/shared/auth/auth-toggle-locale";
-import React from "react";
-import { LayoutProps } from "../../../../.next/types/app/layout";
 import Image from "next/image";
-export default function Layout({ children }: LayoutProps) {
+
+type Props = Readonly<{
+  children: React.ReactNode;
+}>;
+
+export default function Layout({ children }: Props) {
   return (
     <div className="min-h-screen bg-[#0095FF] relative  overflow-hidden flex  items-center justify-center p-4">
       {/* Circles background */}
