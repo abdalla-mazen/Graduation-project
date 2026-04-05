@@ -1,5 +1,5 @@
 // /* eslint-disable @typescript-eslint/no-explicit-any */
-// import { User } from "next-auth";
+import { User } from "next-auth";
 
 // declare module "next-auth" {
 //   /**
@@ -41,9 +41,6 @@
 //   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 //   interface JWT extends User {}
 // }
-
-
-
 
 // // // User data من الـ backend
 // interface BackendUser {
@@ -96,37 +93,91 @@
 //   }
 // }
 
-
 // next-auth.d.ts
-import NextAuth from "next-auth";
+
+// declare module "next-auth" {
+//   interface User {
+//    id: string;
+//     email: string;
+//     username: string;
+//     name: string;
+//     role: "STUDENT" | string;
+//     accessToken: string;
+//     refreshToken: string;
+//     isActive: boolean;
+//     githubUrl: string | null;
+//     linkedinUrl: string | null;
+//     currentSemester: number;
+//     departmentId: number;
+//     targetTrackId: number;
+//     trackId: number;
+//     trackName: string;
+//     year: number;
+//     facultyId: number;
+//     universityId: number;
+//     profile: {
+//       current_semester: number;
+//       department_id: number;
+//       faculty_id: number;
+//       target_track_id: number;
+//       university_id: number;
+//       year: number;
+//     };
+//   }
+
+//   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+//   interface Session  {
+//      user: Omit<User, "accessToken" | "refreshToken">;
+//   expires: string;
+//   }
+// }
+
+// declare module "next-auth/jwt" {
+//   // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+//   interface JWT extends Omit<User, "id"> {
+//  userId: string;
+//   }
+// }
+
 
 declare module "next-auth" {
   interface User {
-    accessToken: string;
-    userId: number;
+    id: string;
+    email: string ;
     username: string;
-    email: string;
-    role: string;
+    name: string;
+    role: "STUDENT" | string;
+    accessToken: string;
+    refreshToken: string;
+    isActive: boolean;
+    githubUrl: string | null;
+    linkedinUrl: string | null;
+    currentSemester: number;
+    departmentId: number;
+    targetTrackId: number;
+    trackId: number;
+    trackName: string;
+    year: number;
+    facultyId: number;
+    universityId: number;
+    profile: {
+      current_semester: number;
+      department_id: number;
+      faculty_id: number;
+      target_track_id: number;
+      university_id: number;
+      year: number;
+    };
   }
 
   interface Session {
-    user: {
-      id: number;
-      username: string;
-      email: string;
-      role: string;
-      name: string;
-    };
-    accessToken: string;
+    user: Omit<User, "accessToken" | "refreshToken">;
+    expires: string;
   }
 }
 
 declare module "next-auth/jwt" {
-  interface JWT {
-    accessToken: string;
-    userId: number;
-    username: string;
-    email: string;
-    role: string;
+  interface JWT extends Omit<User, "id"> {
+    userId: string;
   }
 }

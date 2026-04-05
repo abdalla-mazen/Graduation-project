@@ -2,8 +2,8 @@ import React from "react";
 import { CircleQuestionMark, Clock, Files, TriangleAlert } from "lucide-react";
 // import Main from "@/components/layout/header";
 import AssesmentWarning from "./_components/assesment-warning";
-import { startExamAction } from "../assesment/_actions/exam-start.action";
 import { cookies } from "next/headers";
+import { startExamAction } from "../assesment/_actions/exam-start.action";
 
 export default async function Page() {
 
