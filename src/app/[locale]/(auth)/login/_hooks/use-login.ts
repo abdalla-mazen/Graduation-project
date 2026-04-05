@@ -34,6 +34,7 @@ export default function useLogin() {
         redirect: false,
       });
       // Login error
+      console.log(response);
       if (response?.error) {
         throw new Error("Invalid email or password");
       }
