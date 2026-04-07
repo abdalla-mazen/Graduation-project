@@ -1,28 +1,28 @@
-
-
 import { RegisterValues } from "@/lib/schemas/auth.schema";
 import { useMutation } from "@tanstack/react-query";
 import { registerAction } from "../_actions/register.action";
+import { ApiResponse } from "@/lib/types/register";
+import { RegisterPayload } from "@/lib/types/registerPayload";
+
 
 export default function useRegister() {
-  const { error, isPending, mutate } = useMutation({
-    mutationFn: async (values: RegisterValues) => {
+  const mutation = useMutation<ApiResponse, Error, RegisterPayload>({
+    mutationFn: async (values: RegisterPayload) => {
       const response = await registerAction(values);
 
-      if ("error" in response) {
-        throw new Error(response.error);
+      if (!response.ok) {
+        throw new Error(response.error ?? "Registration failed");
       }
 
-      if ("ok" in response) {
-        if (response?.ok) {
-          location.href = "/login";
-        }
-      }
-      // return response;
+      window.location.href = "/login";
 
       return response;
     },
   });
 
-  return { isPending, error, register: mutate };
+  return {
+    isLoading: mutation.isPending,
+    error: mutation.error ?? null,
+    register: mutation.mutateAsync,
+  };
 }
