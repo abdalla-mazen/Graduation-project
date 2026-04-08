@@ -1,55 +1,40 @@
-// import React from "react";
-// import getJobs from "@/lib/apis/get-posts-linkedin.api";
-// import { LinkedInJobs } from "@/lib/types/jobs";
-// import Link from "next/link";
-// export default async function GetPosts() {
-//   const Jobs: LinkedInJobs = await getJobs();
-//   return (
-//     <>
-//       {Jobs.map((job, index) => (
-//         <div key={index} className="shadow-xl p-4 rounded-lg my-2 ">
-//           <p className="font-bold text-xl">Jop Title : {job.job_title}</p>
-//           <p>Company Name : {job.company_name}</p>
-//           <Link href={job.company_url}>
-//             {" "}
-//             Contact with compant :{" "}
-//             <span className="text-mainColor truncate block w-full md:inline md:w-auto md:truncate-0">
-//               {job.company_url}
-//             </span>
-//           </Link>
-//           <div className="flex gap-3">
-//             <p className="px-2 my-2 bg-mainColor text-white rounded-lg">
-//               {job.is_remote ? "Remote" : "On-site"}
-//             </p>
-//             <p className="px-2 my-2 bg-secondaryColor text-white rounded-lg">
-//               {index % 2 == 0 ? "Full Time" : "Part Time"}
-//             </p>
-//           </div>
-//         </div>
-//       ))}
-//     </>
-//   );
-// }
-
 import React from "react";
 import getJobs from "@/lib/apis/get-posts-linkedin.api";
 import { LinkedInJobs } from "@/lib/types/jobs";
 import Link from "next/link";
 import { Building2, ExternalLink, MapPin, Clock } from "lucide-react";
+import { staticJobs } from "./static-data";
+
+// function لاختيار N عناصر random من array
+function getRandomJobs(jobs: LinkedInJobs, count: number) {
+  const shuffled = [...jobs].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
 
 export default async function GetPosts() {
-  const Jobs: LinkedInJobs = await getJobs();
+  let jobs: LinkedInJobs = [];
+
+  try {
+    jobs = await getJobs();
+  } catch (error) {
+    console.error("Failed to fetch jobs:", error);
+  }
+
+  if (!jobs || jobs.length === 0) {
+    jobs = staticJobs;
+  }
+
+  const randomJobs = getRandomJobs(jobs, 5); // نختار 5 عناصر random
 
   return (
     <div className="flex flex-col gap-3">
-      {Jobs?.map((job, index) => (
+      {randomJobs.map((job, index) => (
         <div
-          key={index}
+          key={job.job_url}
           className="group bg-white border border-slate-200 hover:border-[#0077B5]/40 rounded-2xl p-5 shadow-sm hover:shadow-md hover:shadow-blue-100/50 transition-all duration-250"
         >
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="flex-1 min-w-0">
-
               {/* Job Title */}
               <h3 className="text-base font-bold text-slate-900 group-hover:text-[#0077B5] transition-colors duration-200 mb-1 leading-snug">
                 {job.job_title}

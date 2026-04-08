@@ -1,36 +1,3 @@
-
-// import { Button } from "@/components/ui/button";
-// import { Linkedin } from "lucide-react";
-// import { JobsSkeleton } from "./_Components/Skeleton";
-// import { Suspense } from "react";
-// import GetJobs from "./_Components/GetJobs";
-
-// export default async function LinkedinPosts() {
-//   return (
-//     <div className="w-3/4 mx-auto mt-24">
-//       <div className="shadow-lg rounded-lg p-5">
-//         <h1 className="text-3xl font-bold my-2">LinkedIn jobs</h1>
-//         <p className="text-xl font-bold">Connect your LinkedIn</p>
-//         <div className="flex flex-col gap-3 sm:flex-row items-center sm:justify-between ">
-//           <p className="text-center my-2">
-//             See personalized job recommendations based on your profile and skills.
-//           </p>
-//           <Button className="w-fit bg-mainColor">
-//             <span>
-//               {" "}
-//               <Linkedin />
-//             </span>
-//             Connect
-//           </Button>
-//         </div>
-//       </div>
-//       <Suspense fallback={<JobsSkeleton />}>
-//         <GetJobs />
-//       </Suspense>
-//     </div>
-//   );
-// }
-
 import { Button } from "@/components/ui/button";
 import { Linkedin, Sparkles } from "lucide-react";
 import { JobsSkeleton } from "./_Components/Skeleton";
@@ -79,15 +46,18 @@ export default async function LinkedinPosts() {
               Connect your LinkedIn profile and get AI-powered job recommendations tailored to your skills and experience.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+
+            <p className="text-xs text-slate-400">
+                🔒 We never post on your behalf
+            </p>
+
+            {/* <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <Button className="bg-[#0077B5] hover:bg-[#005f8d] text-white font-semibold px-7 py-5 rounded-xl shadow-md shadow-blue-200 transition-all duration-200 flex items-center gap-2.5 text-sm">
                 <Linkedin className="w-4 h-4" />
                 Connect LinkedIn
               </Button>
-              <p className="text-xs text-slate-400">
-                🔒 We never post on your behalf
-              </p>
-            </div>
+              
+            </div> */}
           </div>
         </div>
 
