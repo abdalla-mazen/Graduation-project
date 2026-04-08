@@ -1,7 +1,24 @@
+"use client";
+
 import { Info } from "lucide-react";
 import React from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+
 export default function Main() {
+  const pathname = usePathname();
+const hiddenRoutes = [
+  "/assesment",
+  "/assesment-access",
+  "/assesment-first",
+];
+
+const shouldHide = hiddenRoutes.some((route) =>
+  pathname.includes(route)
+);
+
+if (shouldHide) return null;
+
   return (
     <>
       <div className="flex  gap-2 items-center bg-white justify-between  py-3 px-2 shadow-md">

@@ -378,9 +378,9 @@ export default function AssesmentWarningClient({ examId }: AssesmentWarningClien
   }, [examId, router]);
 
   const handleNext = async () => {
-    setIsNavigating(true);               // تظهر فوريًا
+    setIsNavigating(true);
     try {
-      await router.push("/assesment");  // انتظار النقل (يمكن أن يأخذ وقت)
+      await router.push("/assesment");
     } finally {
       setIsNavigating(false);
     }

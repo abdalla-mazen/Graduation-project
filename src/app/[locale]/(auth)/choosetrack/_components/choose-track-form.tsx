@@ -42,7 +42,7 @@ export default function ChooseTrackForm({ data }: { data: TracksList }) {
     document.cookie = `trackId=${data.find((track) => track.name === values.track)?.id}; path=/; max-age=31536000`;
     localStorage.setItem("trackId", `${data.find((track) => track.name === values.track)?.id}`);
     // window.location.href = "/assessment-first";
-    router.push("/assesment-first");
+    router.push("/assesment-access");
   };
 
   // console.log("tracks prop:", data);
@@ -111,7 +111,7 @@ export default function ChooseTrackForm({ data }: { data: TracksList }) {
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white capitalize mt-12"
           >
-            {isSubmitting ? <LoaderCircle className="animate-spin" /> : "   choose track"}
+            {isSubmitting ? <LoaderCircle className="animate-spin" /> : "  choose track"}
           </Button>
         </form>
       </Form>

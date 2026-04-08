@@ -1,4 +1,3 @@
-
 import { Suspense } from "react";
 import AssessmentSkeleton from "@/components/skeletons/assesment.skeleton";
 import QuestionsList from "./_components/question-list";
@@ -11,11 +10,8 @@ export default async function page() {
     //   {/* AssessmentSkeleton */}
     // </main>
 
-
-  <main>
-      <Suspense fallback={<AssessmentSkeleton />}>
-        <QuestionsList />
-      </Suspense>
-    </main>
+    <Suspense fallback={<AssessmentSkeleton />}>
+      <QuestionsList />
+    </Suspense>
   );
 }

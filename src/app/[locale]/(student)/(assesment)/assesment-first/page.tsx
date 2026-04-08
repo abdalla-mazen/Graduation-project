@@ -2,36 +2,38 @@ import React from "react";
 import { CircleQuestionMark, Clock, Files, TriangleAlert } from "lucide-react";
 // import Main from "@/components/layout/header";
 import AssesmentWarning from "./_components/assesment-warning";
-import { cookies } from "next/headers";
+
 import { startExamAction } from "../assesment/_actions/exam-start.action";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/auth";
+
 
 export default async function Page() {
+  let examId = null;
+const session = await getServerSession( authOptions );
+  console.log(session);
 
-let examId = null;
-  
-  // جيب الـ trackId من cookies أو localStorage (لازم تحفظه في cookies)
-  const cookieStore = await cookies();
-  const trackIdCookie = cookieStore.get("trackId");
-  
-  if (trackIdCookie?.value) {
-    const trackId = Number(trackIdCookie.value);
-    
+  // const cookieStore = await cookies();
+  // const trackIdCookie = cookieStore.get("trackId");
+
+  if (session?.user) {
+    const trackId = session.user.trackId!;
+
+    console.log("ddd", trackId);
     if (!Number.isNaN(trackId)) {
       try {
         const response = await startExamAction({ track_id: trackId });
         examId = response.exam?.id;
+        console.log("start response:", response);
       } catch (err) {
         console.error("Failed to start exam on server:", err);
       }
     }
   }
 
-
-
-
   return (
     <div>
-      {/* <Main /> */}
+    
       <div className="my-5 ">
         <div className=" w-[90%] md:w-3/4 xl:w-1/2 shadow-lg mx-auto rounded-md py-5">
           <div className="contain w-[90%] mx-auto dark:bg-[#101114]">
@@ -115,11 +117,10 @@ let examId = null;
           </div>
           <div className="line bg-secondaryColor h-0.5 opacity-50 my-10"></div>
           <div className="next flex justify-end mx-auto w-[90%]">
-            <AssesmentWarning  examId={examId}/>
+            <AssesmentWarning examId={examId} />
           </div>
         </div>
       </div>
     </div>
-  
   );
 }
