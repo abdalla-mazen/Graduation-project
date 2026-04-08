@@ -3,9 +3,25 @@ import * as React from "react";
 import { Menu, X, House, Contact, CircleAlert, CirclePlay } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
+
 export default function Navbar() {
+const pathname = usePathname();
+
   const [open, setOpen] = React.useState(false);
   const [active, setActive] = React.useState("Home");
+
+const hiddenRoutes = [
+  "/assesment",
+  "/assesment-access",
+  "/assesment-first",
+];
+
+const shouldHide = hiddenRoutes.some((route) =>
+  pathname.includes(route)
+);
+
+if (shouldHide) return null;
 
   const links = [
     { name: "Home", icon: <House />, href: "/" },

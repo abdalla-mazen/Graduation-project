@@ -372,9 +372,11 @@ export const authOptions: NextAuthOptions = {
           githubUrl: payload.user.github_url,
           linkedinUrl: payload.user.linkedin_url,
           profile: payload.user.profile,
-          facultyId: payload.user.profile.faculty_id,
-          universityId: payload.user.profile.university_id,
-          targetTrackId: payload.user.profile.target_track_id,
+        facultyId: payload.user.profile?.faculty_id ?? null,
+  universityId: payload.user.profile?.university_id ?? null,
+  targetTrackId: payload.user.profile?.target_track_id ?? null,
+
+   isFirstTime: !payload.user.exams?.length,
         };
       },
     }),
@@ -403,6 +405,8 @@ export const authOptions: NextAuthOptions = {
         token.facultyId = user.facultyId;
         token.universityId = user.universityId;
         token.targetTrackId = user.targetTrackId;
+
+         token.isFirstTime = user.isFirstTime;
       }
 
       return token;
@@ -425,9 +429,11 @@ export const authOptions: NextAuthOptions = {
         githubUrl: token.githubUrl,
         linkedinUrl: token.linkedinUrl,
         profile: token.profile,
-        facultyId: token.facultyId,
+        facultyId: token?.facultyId,
         universityId: token.universityId,
         targetTrackId: token.targetTrackId,
+
+            isFirstTime: token.isFirstTime,
       };
 
       return session;

@@ -1,3 +1,4 @@
+"use client";
 
 import { CircleUserRound , Settings, SquarePen , ClipboardList , University , CalendarCheck , LogOut , House ,
    FileUser , Album , Folder , BriefcaseBusiness , Linkedin  , PencilRuler  , Award , MessageCircleQuestionMark , Moon , 
@@ -15,6 +16,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Switch } from "../ui/switch"
 import { Link } from "@/i18n/navigation"
+import { usePathname } from "next/navigation";
 
 // Menu items.
 const items = [
@@ -81,6 +83,19 @@ const items = [
 ]
 
 export function AppSidebar() {
+const pathname = usePathname();
+const hiddenRoutes = [
+  "/assesment",
+  "/assesment-access",
+  "/assesment-first",
+];
+
+const shouldHide = hiddenRoutes.some((route) =>
+  pathname.includes(route)
+);
+
+if (shouldHide) return null;
+
   return (
     <Sidebar>
       <SidebarContent>

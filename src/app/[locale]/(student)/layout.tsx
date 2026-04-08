@@ -4,6 +4,7 @@ import { redirect } from "@/i18n/navigation";
 import Footer from "@/components/layout/footer/footer";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
+import * as React from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -29,7 +30,8 @@ export default async function LocaleLayout({ children, params: { locale } }: Pro
       locale: "en",
     });
   }
-
+ 
+  
   return (
     <>
       <Navbar />

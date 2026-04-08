@@ -56,7 +56,11 @@ export async function finishExamAPI(exam_session_id: number) {
     return { 
       success: true, 
       score: data.score,
-      invalidated: data.invalidated,
+      max_score: data.max_score,
+      total_questions: data.total_questions,
+      correct_answers: data.correct_answers,
+      wrong_answers: data.wrong_answers,
+      invalidated: data.invalidated ?? false,
       finished_at: data.finished_at
     };
     

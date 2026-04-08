@@ -11,6 +11,7 @@ import {
   useTimeZone,
 } from "next-intl";
 import ReactQueryProvider from "./_components/react-query.provider";
+import { SessionProvider } from "next-auth/react";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   // Translation
@@ -26,6 +27,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       enableSystem
       disableTransitionOnChange
     >
+      <SessionProvider>
       {/* Next Intl Provider */}
       <NextIntlClientProvider
         messages={messages}
@@ -39,6 +41,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           {children}
         </ReactQueryProvider>
       </NextIntlClientProvider>
+      </SessionProvider>
     </ThemeProvider>
   );
 }
