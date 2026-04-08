@@ -31,7 +31,7 @@ export default function Layout({ children }: Props) {
           {/* Right side: Books Image */}
           <div className="lg:w-1/2 bg-gradient-to-br from-cyan-100 to-blue-100 flex items-center justify-center relative">
             <div className="relative w-full h-full">
-              <Image src="/images/books-auth.jpg" alt="Auth book" className="object-cover" fill />
+              <Image src="/images/Nexus.png" alt="Auth Nexus" className="object-cover" fill />
             </div>
           </div>
         </div>
