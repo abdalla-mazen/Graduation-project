@@ -11,5 +11,5 @@ export default async function getJobs(){
         throw new Error("Error fetching")
     }
     const payload = await res.json() 
-    return payload
+    return []
 }
