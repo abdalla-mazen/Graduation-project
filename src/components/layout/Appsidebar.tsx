@@ -27,17 +27,17 @@ const items = [
   },
   {
     title: "Assessments",
-    url: "/assessment/rules",
+    url: "assesment",
     icon: ClipboardList ,
   },
   {
     title: "Learning Plan",
-    url: "#",
+    url: "learning-plan",
     icon: CalendarCheck ,
   },
   {
     title: "Academic Courses",
-    url: "#",
+    url: "acad-courses",
     icon: University,
   },
   {
@@ -72,7 +72,7 @@ const items = [
   },
    {
     title: "Industry Request",
-    url: "#",
+    url: "/trends",
     icon: PencilRuler,
   },
   {
