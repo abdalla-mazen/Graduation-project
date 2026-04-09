@@ -5,7 +5,7 @@ export interface Track {
   long_description: string | null;
   market_demand: number;
   popularity_score: number;
-  created_at: string;     // ISO date
-  updated_at: string;     // ISO date
+  created_at: string;     
+  updated_at: string;   
 }
 export type TracksList = Track[];
