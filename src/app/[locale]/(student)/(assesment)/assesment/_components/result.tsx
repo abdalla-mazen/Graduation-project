@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
 interface ResultProps {
@@ -144,13 +145,13 @@ export default function Result({
 
           <div className="mt-6 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button className="w-full rounded-2xl border bg-white font-bold text-blue-500 hover:bg-blue-500 hover:text-white sm:w-1/3">
-              View Details
+              <Link href={"/"}>Go To Home</Link>
             </Button>
             <Button className="w-full rounded-2xl bg-blue-500 font-bold text-white hover:bg-blue-600 sm:w-1/3">
-              Create learning plan
+             <Link href={"/learning-plan"}>Go To learning plan</Link>
             </Button>
             <Button className="w-full rounded-2xl border bg-white font-bold text-blue-500 hover:bg-blue-500 hover:text-white sm:w-1/3">
-              Retake assessment
+              <Link href={"/assesment"}>Retake Assessment</Link>
             </Button>
           </div>
         </div>

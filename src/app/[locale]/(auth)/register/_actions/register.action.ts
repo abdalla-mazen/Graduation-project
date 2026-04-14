@@ -4,7 +4,7 @@ import { ApiResponse } from "@/lib/types/register";
 import { RegisterPayload } from "@/lib/types/registerPayload";
 
 export async function registerAction(data: RegisterPayload) {
-  console.log(process.env.API);
+
   try {
     const response = await fetch(`${process.env.API}/auth/register`, {
       method: "POST",

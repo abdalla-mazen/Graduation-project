@@ -1,4 +1,3 @@
-import { RegisterValues } from "@/lib/schemas/auth.schema";
 import { useMutation } from "@tanstack/react-query";
 import { registerAction } from "../_actions/register.action";
 import { ApiResponse } from "@/lib/types/register";

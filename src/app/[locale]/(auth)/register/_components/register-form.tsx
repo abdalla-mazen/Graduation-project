@@ -89,6 +89,7 @@ export default function RegisterForm({ payload, data }: Props) {
   }, []);
 
   const handleUniversityChange = async (universityId: string) => {
+    if (!universityId) return;
     form.setValue("university", universityId);
     form.setValue("faculty", "");
     form.setValue("department", "");
@@ -110,6 +111,7 @@ export default function RegisterForm({ payload, data }: Props) {
   };
 
   const handleFacultyChange = async (facultyId: string) => {
+    if (!facultyId) return;
     form.setValue("faculty", facultyId);
     form.setValue("department", "");
     setDepartments([]);
@@ -140,6 +142,7 @@ export default function RegisterForm({ payload, data }: Props) {
   };
 
   const onSubmit: SubmitHandler<RegisterValues> = async (values) => {
+
     try {
       if (values.role === "teacher" && values.drPassword !== "2468") {
         form.setError("drPassword", { message: "Invalid doctor password" });
@@ -169,7 +172,7 @@ export default function RegisterForm({ payload, data }: Props) {
           }),
         },
       };
-
+      console.log(finalPayload)
       // console.log("Final Payload to send:", finalPayload);
 
       await doRegister(finalPayload);
@@ -433,12 +436,14 @@ export default function RegisterForm({ payload, data }: Props) {
           )}
         </div>
 
-        {error && (
-          <p className="text-red-600">
-            {error instanceof Error ? error.message : "Unknown error"}
-          </p>
-        )}
+        {error && !error.message.includes("<!doctype") && (
+  <p className="text-red-600">
+    {error instanceof Error ? error.message : "Unknown error"}
+  </p>
+)}
       </form>
     </Form>
   );
 }
+// sedek
+// 11111111
