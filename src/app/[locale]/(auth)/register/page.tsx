@@ -18,7 +18,7 @@ export default async function Page() {
       {/* Register title */}
 
       <h1 className="text-5xl font-bold text-black dark:text-white text-center mb-10 ">
-        register
+        Register
       </h1>
 
       {/* Register form (client component) */}

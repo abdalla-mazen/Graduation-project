@@ -4,6 +4,7 @@ import { Courses } from '@/lib/types/courses'
 import { Progress } from '@/components/ui/progress'
 import { Button } from '@/components/ui/button';
 import Explanation from '../_actions/explanationBuuton';
+import Exambutton from '../_actions/exambutton';
 export default async function GetCoursesData() {
      const courses: Courses = await getCourses()
      const typeStyle: Record<string, { bg: string; text: string }> = {
@@ -13,12 +14,11 @@ export default async function GetCoursesData() {
 }
   return <>
 
-        
          {courses.map((course) => {
           const ts = typeStyle[course.course_type] ?? typeStyle['Core']
           return (
             <div
-              key={course.code}
+              key={course.id}
               className="relative bg-card border rounded-xl p-5 transition-all duration-200 overflow-hidden flex flex-col">
               <div className="flex justify-between items-start mb-3 mt-1">
                 <div  className="font-mono text-xs px-2 py-1 rounded-lg text-white  bg-mainColor">
@@ -56,11 +56,11 @@ export default async function GetCoursesData() {
 
               <Explanation courseId={course.id} />
               <Button className=' bg-mainColor '>Practical Project</Button>
-              <Button className=' bg-mainColor'>Published Exam Now</Button>
+              <Exambutton/>
               </div>
             </div>
           )
         })}
-  
+        
   </>
 }
