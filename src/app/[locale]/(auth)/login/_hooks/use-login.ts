@@ -26,7 +26,7 @@ export default function useLogin() {
         const role = session?.user?.role;
         console.log(role);
         if (session?.user?.role == "TEACHER") {
-          window.location.href = "/";
+          window.location.href = "/doctor-view";
         }
         if (session?.user?.role == "STUDENT") {
           if (session?.user?.isFirstTime) {
