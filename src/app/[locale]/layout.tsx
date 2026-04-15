@@ -1,13 +1,13 @@
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { Tajawal, Sarabun } from "next/font/google";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
 import Providers from "@/components/providers";
 import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
-import { headers } from "next/headers";
+
 
 
 const geistSans = localFont({
