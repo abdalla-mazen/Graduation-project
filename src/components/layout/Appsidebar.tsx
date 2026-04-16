@@ -25,19 +25,19 @@ const items = [
     url: "/",
     icon: House ,
   },
-  {
-    title: "Assessments",
-    url: "assesment",
-    icon: ClipboardList ,
-  },
+  // {
+  //   title: "Assessments",
+  //   url: "/assesment/rules",
+  //   icon: ClipboardList ,
+  // },
   {
     title: "Learning Plan",
-    url: "learning-plan",
+    url: "/learning-plan",
     icon: CalendarCheck ,
   },
   {
     title: "Academic Courses",
-    url: "acad-courses",
+    url: "/acad-courses",
     icon: University,
   },
   {
