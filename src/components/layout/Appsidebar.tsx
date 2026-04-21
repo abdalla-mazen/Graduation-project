@@ -66,7 +66,7 @@ const items = [
   },
   {
     title: "Certificates",
-    url: "#",
+    url: "/certificates/get-certificate",
     icon: Award,
   },
   {

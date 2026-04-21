@@ -8,8 +8,8 @@ export function useAddCertificate() {
     return useMutation({
         mutationFn: (data: CertificateFormValues) => addCertificate(data),
         onSuccess: () => {
-            console.log("Certificate added successfully")
-                        router.push("/certificates/get-certificate") 
+        router.replace("/certificates/get-certificate") 
+        router.refresh()
             
         },
         onError: (error) => {
