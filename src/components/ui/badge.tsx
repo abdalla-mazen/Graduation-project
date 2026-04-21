@@ -9,11 +9,11 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "border-transparent bg-maroon-600 text-white shadow hover:bg-maroon-700 dark:bg-softPink-300 dark:text-zinc-800 dark:hover:bg-softPink-400",
+          "border-transparent bg-maroon-600 text-white shadow dark:bg-softPink-300 dark:text-zinc-800 dark:hover:bg-softPink-400",
         secondary:
-          "border-transparent bg-maroon-50 text-maroon-600  hover:bg-maroon-100 dark:bg-zinc-700 dark:text-softPink-300 dark:hover:bg-zinc-600",
+          "border-transparent bg-maroon-50 text-maroon-600  dark:bg-zinc-700 dark:text-softPink-300 dark:hover:bg-zinc-600",
         subtle:
-          "border-transparent bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-700 dark:text-zinc-50 dark:hover:bg-zinc-600",
+          "border-transparent bg-zinc-100 text-zinc-700 dark:bg-zinc-700 dark:text-zinc-50 dark:hover:bg-zinc-600",
       },
     },
     defaultVariants: {

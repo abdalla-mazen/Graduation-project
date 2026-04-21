@@ -17,6 +17,7 @@ import {
 import { Switch } from "../ui/switch"
 import { Link } from "@/i18n/navigation"
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 // Menu items.
 const items = [
@@ -89,7 +90,7 @@ const hiddenRoutes = [
   "/assesment-access",
   "/assesment-first",
 ];
-
+const session = useSession()
 const shouldHide = hiddenRoutes.some((route) =>
   pathname.includes(route)
 );
@@ -101,19 +102,21 @@ if (shouldHide) return null;
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-              <div className=" flex justify-between items-center bg-sidebarBackground px-3 py-3 rounded-lg dark:bg-sidebarBackgroundDark">
+              <div className="mt-20 flex justify-between items-center bg-sidebarBackground px-3 py-3 rounded-lg dark:bg-sidebarBackgroundDark">
                   <div className="left flex items-center gap-3">
                     <CircleUserRound />
                     <div className="info">
-                      <p className="font-bold">Ali Mohamed Ahmed</p>
-                      <p className="text-xs text-secondaryColor dark:text-secondaryColordark">Alimohamed1233@gmail.com</p>
+                      <p className="font-bold">Name : {session.data?.user.name}</p>
+                      <p className="text-xs text-secondaryColor dark:text-secondaryColordark">Email : {session.data?.user.email}</p>
                     </div>
                   </div>
-                  <div className="rigrt">
+                  <Link href={"/profile"}>
+                  <div className="rigrt cursor-pointer">
                     <SquarePen />
                   </div>
+                  </Link>
               </div>
-            <SidebarMenu className="bg-sidebarBackground my-2 rounded-lg   font-bold dark:bg-sidebarBackgroundDark">
+            <SidebarMenu className="bg-sidebarBackground my-2 rounded-lg font-bold dark:bg-sidebarBackgroundDark">
               {items.map((item) =>(
                 <SidebarMenuItem key={item.title} >
                   <SidebarMenuButton  asChild>
@@ -126,18 +129,11 @@ if (shouldHide) return null;
               ))}
             </SidebarMenu>
             <div className="bg-sidebarBackground my-2 rounded-lg py-3 flex flex-col gap-2 font-bold dark:bg-sidebarBackgroundDark">
-             <div className="box-one flex gap-3 items-center py-1 px-3 rounded-lg hover:bg-[#f4f4f5] hover:cursor-pointer dark:hover:bg-[#27272a]">
+             <div className=" flex gap-3 items-center py-1 px-3 rounded-lg hover:bg-[#f4f4f5] hover:cursor-pointer dark:hover:bg-[#27272a]">
               <MessageCircleQuestionMark />
               <span>Help</span>
              </div>
-             <div className="box-two flex justify-between py-1 px-3 rounded-lg hover:bg-[#f4f4f5] hover:cursor-pointer dark:hover:bg-[#27272a]">
-              <div className="flex gap-3 items-center">
-              <Moon />
-              <span>Dark Mode</span>
-              </div>
-              <Switch/>
-             </div>
-             <div className="box-three flex gap-3 items-center py-1 px-3 rounded-lg hover:bg-[#f4f4f5] hover:cursor-pointer dark:hover:bg-[#27272a]">
+             <div className=" flex gap-3 items-center py-1 px-3 rounded-lg hover:bg-[#f4f4f5] hover:cursor-pointer dark:hover:bg-[#27272a]">
               <LogOut />
               <span>Logout</span>
              </div>
