@@ -3,8 +3,8 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { Tajawal, Sarabun } from "next/font/google";
 import { notFound } from "next/navigation";
 import localFont from "next/font/local";
-import { Toaster } from "sonner";
 import Providers from "@/components/providers";
+import { Toaster } from "@/components/ui/sonner";
 import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
