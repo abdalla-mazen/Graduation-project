@@ -70,7 +70,7 @@ export default function Notifications({ data, count }: NotificationsProps) {
         <DropdownMenuLabel className="flex items-center justify-between text-sm font-semibold">
           <span>Notifications</span>
 
-          {count > 0 && (
+          {count >= 0 && (
             <div className="flex items-center gap-2">
                {/* Refresh all */}
               <span onClick={()=>refrshAll()}> <RefreshCw  className="text-mainColor w-5 h-5 cursor-pointer"/></span>
