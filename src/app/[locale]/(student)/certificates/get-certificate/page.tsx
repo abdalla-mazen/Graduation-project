@@ -1,118 +1,153 @@
-
-
 import { getCertificates } from '@/lib/apis/get-certificates.api'
-import { CertificatesResponse, Certificate } from '@/lib/types/certificate-user'
-import { DM_Sans, DM_Serif_Display } from 'next/font/google'
+import { getSkills } from '@/lib/apis/get-skills.api'
+import { CertificatesResponse } from '@/lib/types/certificate-user'
+import { SkillsResponse } from '@/lib/types/skills-user'
+import { DM_Sans } from 'next/font/google'
+import Link from 'next/link'
 
 const dmSans = DM_Sans({ subsets: ['latin'] })
-const dmSerif = DM_Serif_Display({ weight: '400', subsets: ['latin'] })
-
-const SKILL_COLORS: Record<string, { bg: string; text: string; icon: string }> = {
-  default: { bg: '#EEEDFE', text: '#3C3489', icon: '#7F77DD' },
-  react:   { bg: '#EEEDFE', text: '#3C3489', icon: '#7F77DD' },
-  node:    { bg: '#E1F5EE', text: '#085041', icon: '#1D9E75' },
-  design:  { bg: '#FAEEDA', text: '#633806', icon: '#BA7517' },
-  ts:      { bg: '#FAECE7', text: '#4A1B0C', icon: '#D85A30' },
-}
-
-function getSkillColors(skillName?: string) {
-  const key = skillName?.toLowerCase().split(/[\s.]/)[0] ?? 'default'
-  return SKILL_COLORS[key] ?? SKILL_COLORS.default
-}
+export const dynamic = "force-dynamic"
 
 export default async function Page() {
   const payload: CertificatesResponse = await getCertificates()
-  const thisYear = new Date().getFullYear()
-  const thisYearCount = payload?.filter(c =>
-    new Date(c.issued_at).getFullYear() === thisYear
-  ).length ?? 0
-  const uniqueSkills = new Set(payload?.map(c => c.skill?.name).filter(Boolean)).size
+  const skills: SkillsResponse = await getSkills()
+
+  const technicalSkills = skills.filter((s) => s.type === "TECHNICAL")
+
+  const skillMap = new Map(
+    technicalSkills.map((s) => [s.id, s.name])
+  )
+
+  const hasData = payload.length > 0
 
   return (
-    <div className={`min-h-screen bg-white p-6 flex justify-center w-full sm:w-3/4 mx-auto ${dmSans.className}`}>
-      <div className="w-full">
+    <div className={`min-h-screen p-6 ${dmSans.className}`}>
+      <div className="w-full sm:w-3/4 mx-auto">
 
-        {/* Header */}
-        <p className="text-xs font-medium tracking-widest uppercase text-gray-400 mb-1">
-          Portfolio
-        </p>
-        <h1 className={`text-4xl text-gray-900 mb-8 leading-tight ${dmSerif.className}`}>
-          My Certificates
-        </h1>
-
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-3 mb-7">
-          {[
-            { label: 'Total',     value: payload?.length ?? 0 },
-            { label: 'This year', value: thisYearCount },
-            { label: 'Skills',    value: uniqueSkills },
-          ].map(s => (
-            <div key={s.label} className="bg-gray-50 rounded-xl p-4">
-              <p className="text-xs text-gray-400 mb-1">{s.label}</p>
-              <p className="text-2xl font-medium text-gray-900">{s.value}</p>
+        {/* HEADER */}
+        {hasData && (
+          <div className="mb-10 flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-semibold text-gray-900">
+                Certificates
+              </h1>
+              <p className="text-gray-500 text-sm mt-1">
+                Track your achievements & skills
+              </p>
             </div>
-          ))}
-        </div>
 
-        {/* Cards */}
-        <div className="flex flex-col gap-3">
-          {payload?.map((cert: Certificate) => {
-            const colors = getSkillColors(cert.skill?.name)
-            return (
-              <div
-                key={cert.id}
-                className="flex items-center gap-4 bg-white border border-gray-100 rounded-2xl px-5 py-4 hover:border-gray-200 transition-colors duration-150"
-              >
-                {/* Icon */}
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                  style={{ background: colors.bg }}
-                >
-                  <svg viewBox="0 0 20 20" className="w-4 h-4" fill="none">
-                    <path
-                      d="M10 2L12.4 7.2L18 8.1L14 12L15 17.6L10 15L5 17.6L6 12L2 8.1L7.6 7.2L10 2Z"
-                      fill={colors.icon}
-                    />
-                  </svg>
-                </div>
-
-                {/* Body */}
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900 truncate mb-1">
-                    {cert.title}
-                  </p>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    {cert.skill?.name && (
-                      <span
-                        className="text-xs font-medium px-2.5 py-0.5 rounded-full"
-                        style={{ background: colors.bg, color: colors.text }}
-                      >
-                        {cert.skill.name}
-                      </span>
-                    )}
-                    <span className="text-xs text-gray-400">
-                      {new Date(cert.issued_at).toLocaleDateString('en-US', {
-                        month: 'short', day: 'numeric', year: 'numeric',
-                      })}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Arrow */}
-                <svg className="w-4 h-4 text-gray-300 shrink-0" viewBox="0 0 16 16" fill="none">
-                  <path d="M6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-            )
-          })}
-        </div>
-
-        {/* Empty state */}
-        {payload?.length === 0 && (
-          <div className="text-center text-gray-400 mt-16 text-sm">
-            No certificates yet
+            {/* ADD BUTTON (when data exists) */}
+            <Link href={"/certificates/create-certificate"}>
+            <button className="px-2 sm:px-4 py-2 rounded-lg bg-mainColor text-white text-sm">
+              Add Certificate
+            </button>
+            </Link>
           </div>
         )}
+
+        {/* GRID */}
+        {hasData && (
+          <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {payload.map((cert) => {
+              const skillName = skillMap.get(cert.skill_id)
+
+              return (
+                <div
+                  key={cert.id}
+                  className="bg-white rounded-2xl border border-gray-100 p-5 flex flex-col justify-between hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
+                >
+                  <div className="space-y-3">
+
+                    <div>
+                      <p className="text-[11px] uppercase tracking-wide text-gray-400 mb-1">
+                        Skill
+                      </p>
+                      <span className="inline-block text-xs font-medium px-3 py-1 rounded-full bg-indigo-50 text-indigo-600">
+                        {skillName || "Unknown"}
+                      </span>
+                    </div>
+
+                    <div>
+                      <p className="text-[11px] uppercase tracking-wide text-gray-400 mb-1">
+                        Certificate
+                      </p>
+                      <h2 className="text-base font-semibold text-gray-900">
+                        {cert.title}
+                      </h2>
+                    </div>
+
+                    <div>
+                      <p className="text-[11px] uppercase tracking-wide text-gray-400 mb-1">
+                        Provider
+                      </p>
+                      <p className="text-sm text-gray-700">
+                        {cert.provider}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-[11px] uppercase tracking-wide text-gray-400 mb-1">
+                        Issued
+                      </p>
+                      <p className="text-sm text-gray-700">
+                        {new Date(cert.issued_at).toLocaleDateString()}
+                      </p>
+                    </div>
+
+                  </div>
+
+                  <a
+                    href={cert.credential_url}
+                    target="_blank"
+                    className="mt-6 text-sm font-medium text-white bg-mainColor px-4 py-2 rounded-lg  text-center"
+                  >
+                    View Credential
+                  </a>
+                </div>
+                
+              )
+            })}
+          </div>
+        )}
+       
+
+        {/* EMPTY STATE */}
+        {!hasData && (
+          <div className="flex flex-col items-center justify-center text-center mt-24">
+
+            <div className="w-16 h-16 flex items-center justify-center rounded-full bg-gray-100 mb-4">
+              <svg
+                className="w-7 h-7 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 12h6m-6 4h6M7 4h10a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2z"
+                />
+              </svg>
+            </div>
+
+            <h3 className="text-lg font-semibold text-gray-900 mb-1">
+              No certificates yet
+            </h3>
+
+            <p className="text-sm text-gray-500 mb-6 max-w-sm">
+              Start adding your certificates to showcase your skills and achievements.
+            </p>
+
+            {/* ADD BUTTON (empty state position) */}
+           <Link href={"/certificates/create-certificate"}>
+            <button className="px-5 py-2 rounded-lg bg-mainColor text-white text-sm font-medium">
+               Add Certificate
+            </button>
+           </Link>
+          </div>
+        )}
+
       </div>
     </div>
   )

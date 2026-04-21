@@ -26,9 +26,8 @@ export default function CertificateForm({ skills }: Props) {
       issue_date: "",
     },
   });
-  const { mutate, isPending } = useAddCertificate()
+  const { mutate } = useAddCertificate()
   const onSubmit = (data: CertificateFormValues) => {
-    // console.log(data);
      mutate(data)
   };
 
