@@ -4,7 +4,6 @@ import {
   CircleUserRound,
   Settings,
   SquarePen,
-  ClipboardList,
   University,
   CalendarCheck,
   LogOut,
@@ -17,7 +16,6 @@ import {
   PencilRuler,
   Award,
   MessageCircleQuestionMark,
-  Moon,
 } from "lucide-react";
 
 import {
@@ -29,10 +27,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Switch } from "../ui/switch";
 import { Link } from "@/i18n/navigation";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 // Menu items.
 const items = [
@@ -41,19 +39,19 @@ const items = [
     url: "/",
     icon: House,
   },
-  {
-    title: "Assessments",
-    url: "assesment",
-    icon: ClipboardList,
-  },
+  // {
+  //   title: "Assessments",
+  //   url: "/assesment/rules",
+  //   icon: ClipboardList ,
+  // },
   {
     title: "Learning Plan",
-    url: "learning-plan",
+    url: "/learning-plan",
     icon: CalendarCheck,
   },
   {
     title: "Academic Courses",
-    url: "acad-courses",
+    url: "/acad-courses",
     icon: University,
   },
   {
@@ -101,6 +99,10 @@ const items = [
 export function AppSidebar() {
   const pathname = usePathname();
   const hiddenRoutes = ["/assesment", "/assesment-access", "/assesment-first"];
+  const session = useSession();
+  // const shouldHide = hiddenRoutes.some((route) =>
+  //   pathname.includes(route)
+  // );
 
   const shouldHide = hiddenRoutes.some((route) => pathname.includes(route));
 
@@ -111,21 +113,23 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <div className=" flex justify-between items-center bg-sidebarBackground px-3 py-3 rounded-lg dark:bg-sidebarBackgroundDark">
+            <div className="mt-20 flex justify-between items-center bg-sidebarBackground px-3 py-3 rounded-lg dark:bg-sidebarBackgroundDark">
               <div className="left flex items-center gap-3">
                 <CircleUserRound />
                 <div className="info">
-                  <p className="font-bold">Ali Mohamed Ahmed</p>
+                  <p className="font-bold">Name : {session.data?.user.name}</p>
                   <p className="text-xs text-secondaryColor dark:text-secondaryColordark">
-                    Alimohamed1233@gmail.com
+                    Email : {session.data?.user.email}
                   </p>
                 </div>
               </div>
-              <div className="rigrt">
-                <SquarePen />
-              </div>
+              <Link href={"/profile"}>
+                <div className="rigrt cursor-pointer">
+                  <SquarePen />
+                </div>
+              </Link>
             </div>
-            <SidebarMenu className="bg-sidebarBackground my-2 rounded-lg   font-bold dark:bg-sidebarBackgroundDark">
+            <SidebarMenu className="bg-sidebarBackground my-2 rounded-lg font-bold dark:bg-sidebarBackgroundDark">
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
@@ -141,13 +145,6 @@ export function AppSidebar() {
               <div className="box-one flex gap-3 items-center py-1 px-3 rounded-lg hover:bg-[#f4f4f5] hover:cursor-pointer dark:hover:bg-[#27272a]">
                 <MessageCircleQuestionMark />
                 <span>Help</span>
-              </div>
-              <div className="box-two flex justify-between py-1 px-3 rounded-lg hover:bg-[#f4f4f5] hover:cursor-pointer dark:hover:bg-[#27272a]">
-                <div className="flex gap-3 items-center">
-                  <Moon />
-                  <span>Dark Mode</span>
-                </div>
-                <Switch />
               </div>
               <button
                 onClick={() => signOut({ callbackUrl: "/login" })}

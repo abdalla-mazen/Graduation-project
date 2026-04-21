@@ -5,7 +5,7 @@ import { authOptions } from "@/auth"
 export async function getTrends() {
     const token = await getToken()
     const session = await getServerSession(authOptions)
-    const res = await fetch(`${process.env.API}/market-trends?track_id=${session?.user.trackId}&limit=10`,{
+    const res = await fetch(`${process.env.API}/market-trends?track_id=${session?.user.trackId}&limit=20`,{
         headers : {
          "Content-Type": "application/json",
          Authorization: `Bearer ${token?.accessToken}`
@@ -15,6 +15,8 @@ export async function getTrends() {
     if (!res.ok) {
         throw new Error ("Failed Fetching")
     }
-    const payload = res.json()
+     
+    const payload = await res.json()
+
     return payload
 }

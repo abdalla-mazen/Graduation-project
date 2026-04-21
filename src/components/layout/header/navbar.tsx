@@ -1,92 +1,57 @@
-"use client";
-import * as React from "react";
-import { Menu, X, House, Contact, CircleAlert, CirclePlay } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { usePathname } from "next/navigation";
+import {House,Contact,CircleAlert,CirclePlay,} from "lucide-react";
+
+import NotificationsServer from "../notifications/notifications-server";
+import MobileMenuButton from "./iconNavbar";
+
 
 export default function Navbar() {
-const pathname = usePathname();
-
-  const [open, setOpen] = React.useState(false);
-  const [active, setActive] = React.useState("Home");
-
-const hiddenRoutes = [
-  "/assesment",
-  "/assesment-access",
-  "/assesment-first",
-];
-
-const shouldHide = hiddenRoutes.some((route) =>
-  pathname.includes(route)
-);
-
-if (shouldHide) return null;
-
   const links = [
     { name: "Home", icon: <House />, href: "/" },
-    { name: "Courses", icon: <CirclePlay />, href: "/" },
-    { name: "About", icon: <CircleAlert />, href: "/" },
-    { name: "Contact ", icon: <Contact />, href: "/" },
+    { name: "Courses", icon: <CirclePlay />, href: "/courses" },
+    { name: "About", icon: <CircleAlert />, href: "/about" },
+    { name: "Contact", icon: <Contact />, href: "/contact" },
   ];
 
   return (
     <nav className="relative top-0 left-0 w-full bg-white dark:bg-black shadow-md z-50">
-      <div className=" w-[90%] mx-auto flex items-center justify-between py-4">
-        {/* Logo */}
-        <div className="flex">
-          <h1 className="text-3xl text-blue-600 font-bold">Nexus</h1>
-        </div>
+      <div className="w-[90%] mx-auto flex items-center justify-between py-4">
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <button className="p-2" onClick={() => setOpen(!open)}>
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
+        {/* Logo */}
+        <Link href="/" className="text-2xl font-bold text-mainColor">
+          Nexus
+        </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex justify-center gap-16 font-light">
+        <div className="hidden md:flex items-center gap-10">
           {links.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              onClick={() => setActive(link.name)}
-              className={`text-xs flex flex-col items-center gap-1  ${active === link.name ? "font-semibold " : ""}`}
+              className="flex flex-col items-center text-xs gap-1 text-gray-600 hover:text-black"
             >
               {link.icon}
               <span>{link.name}</span>
             </Link>
           ))}
+
+          <NotificationsServer />
         </div>
 
-        {/* Buttons */}
-        <div className="hidden  md:flex gap-3">
-          <Button className="bg-mainColor">Login</Button>
-          <Button className="bg-mainColor">Register</Button>
+        {/* Right side */}
+        <div className="hidden md:flex gap-3">
+          <Link className="px-4 py-2 bg-mainColor text-white rounded-lg" href="/login">
+            Login
+          </Link>
         </div>
+
+        {/* 🔥 Mobile Menu Button */}
+        <div className="md:hidden flex items-center gap-3">
+          <NotificationsServer />
+          <MobileMenuButton links={links} />
+        </div>
+
       </div>
-
-      {/* Mobile Menu */}
-      {open && (
-        <div className="md:hidden w-full bg-white dark:bg-black border-t shadow-md p-4 flex flex-col gap-4">
-          {links.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={() => setActive(link.name)}
-              className={`text-xs flex flex-col items-center gap-1 ${active === link.name ? "font-bold" : ""}`}
-            >
-              {link.icon}
-              <span>{link.name}</span>
-            </Link>
-          ))}
-          <div className="flex flex-col gap-3">
-            <Button className="bg-mainColor">Login</Button>
-            <Button className="bg-mainColor">Register</Button>
-          </div>
-        </div>
-      )}
     </nav>
   );
 }
