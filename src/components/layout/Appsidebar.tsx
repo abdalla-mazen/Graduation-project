@@ -75,6 +75,11 @@ const items = [
     icon: Folder,
   },
   {
+    title: "Experience",
+    url: "/experience",
+    icon: BriefcaseBusiness,
+  },
+  {
     title: "Job Description",
     url: "/Linkedin/posts",
     icon: BriefcaseBusiness,
