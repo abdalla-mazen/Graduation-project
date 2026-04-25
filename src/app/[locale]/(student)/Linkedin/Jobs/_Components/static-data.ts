@@ -1,6 +1,6 @@
-import { LinkedInJobs } from "@/lib/types/jobs";
+import { LinkedInJobs } from "@/lib/types/Posts-linkedin";
 
-export const staticJobs:LinkedInJobs = [
+export const staticJobs: LinkedInJobs = [
   {
     job_url: "https://www.linkedin.com/jobs/view/1000000001/",
     job_title: "Frontend Developer",

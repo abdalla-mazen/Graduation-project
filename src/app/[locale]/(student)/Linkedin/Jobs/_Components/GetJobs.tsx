@@ -1,6 +1,6 @@
 import React from "react";
 import getJobs from "@/lib/apis/get-posts-linkedin.api";
-import { LinkedInJobs } from "@/lib/types/jobs";
+import { LinkedInJobs } from "@/lib/types/Posts-linkedin";
 import Link from "next/link";
 import { Building2, ExternalLink, MapPin, Clock } from "lucide-react";
 import { staticJobs } from "./static-data";

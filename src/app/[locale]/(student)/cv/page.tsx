@@ -1,4 +1,4 @@
-import CreateCvButton from "./_components/create-cv-button";
+// import CreateCvButton from "./_components/create-cv-button";
 import CvForm from "./_components/cv-form";
 import YoutubeButton from "./_components/youtube-button";
 
@@ -24,10 +24,10 @@ export default function Page() {
         {/* Bottom Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* AI CV Maker */}
-          <CreateCvButton />
+          {/* <CreateCvButton /> */}
 
           {/* YouTube Card */}
-          <YoutubeButton />
+          {/* <YoutubeButton /> */}
         </div>
       </div>
     </div>
