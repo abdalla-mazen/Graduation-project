@@ -100,7 +100,7 @@ const config: Config = {
   		},
   		fontFamily: {
   			edwardian: [
-  				'Edwardian Script ITC"',
+  				'Edwardian Script ITCn',
   				'cursive'
   			]
   		},
