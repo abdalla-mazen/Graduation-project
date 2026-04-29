@@ -1,7 +1,18 @@
 import React from "react";
-import { LinkedInJobs } from "@/lib/types/jobs";
+
 import Link from "next/link";
 import { Building2, ExternalLink, MapPin, SearchX } from "lucide-react";
+
+type Job = {
+  job_url: string;
+  job_title: string;
+  company_url: string;
+  company_name: string;
+  location: string;
+  is_remote: boolean;
+};
+
+type LinkedInJobs = Job[];
 
 type GetJobsProps = {
   jobsPromise: LinkedInJobs;

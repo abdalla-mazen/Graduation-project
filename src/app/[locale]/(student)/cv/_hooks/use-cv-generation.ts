@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import createCvAction from "../_actions/create-cv.action";
+import { CVData } from "@/lib/types/create-cv";
 
 export default function useCvGeneration() {
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
   const { error, isPending, mutate } = useMutation({
-    mutationFn: async () => {
-      const { base64, contentType } = await createCvAction();
+    mutationFn: async (payload:CVData) => {
+      const { base64, contentType } = await createCvAction(payload);
 
       // convert base64 to binary data
       const byteCharacters = atob(base64);
