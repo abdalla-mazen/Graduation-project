@@ -1,4 +1,4 @@
-export default async function getJobs(){
+export default async function getPosts(){
     const res = await fetch(`https://nexusporject.runasp.net/LinkedIn/GetJobs`,
         {
             headers : {
