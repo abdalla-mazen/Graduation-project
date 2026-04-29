@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {House,Contact,CircleAlert,CirclePlay,} from "lucide-react";
+import {House,Contact, FileUser, PencilRuler,} from "lucide-react";
 
 import NotificationsServer from "../notifications/notifications-server";
 import MobileMenuButton from "./iconNavbar";
@@ -8,9 +8,9 @@ import MobileMenuButton from "./iconNavbar";
 export default function Navbar() {
   const links = [
     { name: "Home", icon: <House />, href: "/" },
-    { name: "Courses", icon: <CirclePlay />, href: "/courses" },
-    { name: "About", icon: <CircleAlert />, href: "/about" },
-    { name: "Contact", icon: <Contact />, href: "/contact" },
+    { name: "CV", icon: <FileUser />, href: "/cv" },
+    { name: "Trends", icon: <PencilRuler />, href: "/Trends" },
+    { name: "Profile", icon: <Contact />, href: "/profile" },
   ];
 
   return (
@@ -41,11 +41,11 @@ export default function Navbar() {
         {/* Right side */}
         <div className="hidden md:flex gap-3">
           <Link className="px-4 py-2 bg-mainColor text-white rounded-lg" href="/login">
-            Login
+            LogOut
           </Link>
         </div>
 
-        {/* 🔥 Mobile Menu Button */}
+        {/*  Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-3">
           <NotificationsServer />
           <MobileMenuButton links={links} />

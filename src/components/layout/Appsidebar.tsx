@@ -39,11 +39,6 @@ const items = [
     url: "/",
     icon: House,
   },
-  // {
-  //   title: "Assessments",
-  //   url: "/assesment/rules",
-  //   icon: ClipboardList ,
-  // },
   {
     title: "Learning Plan",
     url: "/learning-plan",
@@ -53,11 +48,6 @@ const items = [
     title: "Academic Courses",
     url: "/acad-courses",
     icon: University,
-  },
-  {
-    title: "Courses",
-    url: "#",
-    icon: Album,
   },
   {
     title: "CV Coach",
@@ -96,7 +86,7 @@ const items = [
   },
   {
     title: "Settings",
-    url: "#",
+    url: "/profile",
     icon: Settings,
   },
 ];
@@ -105,10 +95,6 @@ export function AppSidebar() {
   const pathname = usePathname();
   const hiddenRoutes = ["/assesment", "/assesment-access", "/assesment-first"];
   const session = useSession();
-  // const shouldHide = hiddenRoutes.some((route) =>
-  //   pathname.includes(route)
-  // );
-
   const shouldHide = hiddenRoutes.some((route) => pathname.includes(route));
 
   if (shouldHide) return null;
@@ -147,10 +133,7 @@ export function AppSidebar() {
               ))}
             </SidebarMenu>
             <div className="bg-sidebarBackground my-2 rounded-lg py-3 flex flex-col gap-2 font-bold dark:bg-sidebarBackgroundDark">
-              <div className="box-one flex gap-3 items-center py-1 px-3 rounded-lg hover:bg-[#f4f4f5] hover:cursor-pointer dark:hover:bg-[#27272a]">
-                <MessageCircleQuestionMark />
-                <span>Help</span>
-              </div>
+            
               <button
                 onClick={() => signOut({ callbackUrl: "/login" })}
                 className="box-three flex gap-3 items-center py-1 px-3 rounded-lg hover:bg-[#f4f4f5] cursor-pointer dark:hover:bg-[#27272a]"
