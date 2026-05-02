@@ -18,7 +18,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRouter } from "@/i18n/navigation";
-import type { CheckedState } from "@radix-ui/react-checkbox";
 
 import {
   Command,

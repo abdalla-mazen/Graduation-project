@@ -9,7 +9,7 @@ const router = useRouter()
   return useMutation({
     mutationFn: (payload: StudentPathPayload) => changeProfile(payload),
 
-    onSuccess: async (data) => {
+    onSuccess: async () => {
       
     router.replace("/login")
      

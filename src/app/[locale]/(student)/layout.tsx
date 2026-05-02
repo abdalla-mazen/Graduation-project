@@ -5,7 +5,6 @@ import Footer from "@/components/layout/footer/footer";
 import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import * as React from "react";
-import Notifications from "@/components/layout/notifications/notifications-client";
 
 type Props = {
   children: React.ReactNode;

@@ -5,7 +5,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_BASE!;
 type VerifyOtpResponse = {
   success: boolean;
   message?: string;
-  data?: any;
+  data?: Record<string, unknown>;
 };
 
 export async function verifyOtpAction({
@@ -28,7 +28,7 @@ export async function verifyOtpAction({
       cache: "no-store",
     });
 
-    const data = await res.json();
+    const data: { message?: string } & Record<string, unknown> = await res.json();
 
     if (!res.ok) {
       return {
@@ -42,10 +42,10 @@ export async function verifyOtpAction({
       data,
       message: data?.message || "OTP verified successfully",
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     return {
       success: false,
-      message: error.message || "Something went wrong",
+      message: error instanceof Error ? error.message : "Something went wrong",
     };
   }
 }

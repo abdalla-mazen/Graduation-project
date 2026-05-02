@@ -79,7 +79,7 @@ export interface Event {
   exam_id: number;
 
   event_type: EventType;
-  meta: Record<string, any> | null;
+  meta: Record<string, unknown> | null;
   timestamp: ISODateString;
 }
 

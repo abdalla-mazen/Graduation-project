@@ -40,7 +40,7 @@ export default async function Page() {
               No exams yet
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xs leading-relaxed">
-              You don't have any exams scheduled right now.
+              You don&apos;t have any exams scheduled right now.
             </p>
           </div>
         ) : (

@@ -68,12 +68,6 @@ export default function RegisterForm({ payload, data }: Props) {
   const role = form.watch("role");
 
   React.useEffect(() => {
-    const subscription = form.watch((value) => {
-    });
-    return () => subscription.unsubscribe();
-  }, [form]);
-
-  React.useEffect(() => {
     const fetchSemesters = async () => {
       try {
         const res = await fetch(
@@ -172,7 +166,6 @@ export default function RegisterForm({ payload, data }: Props) {
           }),
         },
       };
-      console.log(finalPayload)
       // console.log("Final Payload to send:", finalPayload);
 
       await doRegister(finalPayload);

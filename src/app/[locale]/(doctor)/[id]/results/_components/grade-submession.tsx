@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Form } from "@/components/ui/form";
@@ -68,6 +68,8 @@ export default function GradeSubmissions({ data }: GradeSubmissionsProps) {
 
     return init;
   });
+  const scoresRef = useRef(scores);
+  const feedbacksRef = useRef(feedbacks);
 
   const displayedSubmissions =
     activeTab === "submitted" ? needsGrading : graded;
@@ -103,9 +105,6 @@ export default function GradeSubmissions({ data }: GradeSubmissionsProps) {
     },
   });
 
-  const getScore = (submissionId: number, answerId: number) =>
-    scores[submissionId]?.[answerId] ?? 0;
-
   const updateScore = (submissionId: number, answerId: number, value: number) => {
     setScores((prev) => ({
       ...prev,
@@ -124,13 +123,21 @@ export default function GradeSubmissions({ data }: GradeSubmissionsProps) {
   };
 
   useEffect(() => {
+    scoresRef.current = scores;
+  }, [scores]);
+
+  useEffect(() => {
+    feedbacksRef.current = feedbacks;
+  }, [feedbacks]);
+
+  useEffect(() => {
     if (selectedSubmissionKey == null || currentAnswerKey == null) {
       return;
     }
 
     form.reset({
-      score: getScore(selectedSubmissionKey, currentAnswerKey),
-      feedback: feedbacks[selectedSubmissionKey] ?? "",
+      score: scoresRef.current[selectedSubmissionKey]?.[currentAnswerKey] ?? 0,
+      feedback: feedbacksRef.current[selectedSubmissionKey] ?? "",
     });
   }, [currentAnswerKey, form, selectedSubmissionKey]);
 
