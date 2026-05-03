@@ -1,7 +1,7 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { ThemeProvider } from "next-themes";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   Locale,
   NextIntlClientProvider,
@@ -12,6 +12,14 @@ import {
 } from "next-intl";
 import ReactQueryProvider from "./_components/react-query.provider";
 import { SessionProvider } from "next-auth/react";
+
+const ReactQueryDevtools = dynamic(
+  () =>
+    import("@tanstack/react-query-devtools").then(
+      (module) => module.ReactQueryDevtools,
+    ),
+  { ssr: false },
+);
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   // Translation
@@ -36,9 +44,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         now={now}
       >
         <ReactQueryProvider>
-          {/* react query dev tools */}
-          <ReactQueryDevtools />
           {children}
+          {process.env.NODE_ENV === "development" ? <ReactQueryDevtools /> : null}
         </ReactQueryProvider>
       </NextIntlClientProvider>
       </SessionProvider>
