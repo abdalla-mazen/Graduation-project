@@ -1,7 +1,6 @@
 import React from "react";
 import RegisterForm from "./_components/register-form";
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
 import { University } from "@/lib/types/univeristy";
 import getUniversities from "@/lib/apis/get-university.api";
 import getTracks from "@/lib/apis/get-track.api";

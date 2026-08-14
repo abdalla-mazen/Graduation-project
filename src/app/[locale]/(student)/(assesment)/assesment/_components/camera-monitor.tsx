@@ -389,7 +389,8 @@ import { Camera, Eye, Grip, ShieldCheck } from "lucide-react";
 import Webcam from "react-webcam";
 import { sendVisionFrame, type VisionCheckResponse } from "../_actions/vision-action";
 
-const FRAME_INTERVAL_MS = 120000;
+// const FRAME_INTERVAL_MS = 120000;
+const FRAME_INTERVAL_MS = 20000;
 const MOBILE_BREAKPOINT = 640;
 const MOBILE_TOP_OFFSET = 92;
 const SCREEN_PADDING = 16;

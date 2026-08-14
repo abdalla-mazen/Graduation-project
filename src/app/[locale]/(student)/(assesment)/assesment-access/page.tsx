@@ -362,7 +362,7 @@
 //   );
 // }
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Webcam from "react-webcam";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
@@ -371,8 +371,6 @@ import { Video, VideoOff, Mic, MicOff, Monitor, AlertTriangle, ChevronRight } fr
 import { Link } from "@/i18n/navigation";
 
 export default function ExamCameraSetup() {
-  const webcamRef = useRef<Webcam>(null);
-
   const [camOn, setCamOn] = useState(false);
   const [micOn, setMicOn] = useState(false);
   const [screenOn, setScreenOn] = useState(false);
@@ -413,11 +411,6 @@ export default function ExamCameraSetup() {
     }
   };
 
-  const handleStart = () => {
-    const frame = webcamRef.current?.getScreenshot();
-    console.log("Initial frame:", frame);
-  };
-
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 sm:p-6">
       <div className="w-full  sm:max-w-md  md:max-w-2xl xl:max-w-3xl flex flex-col gap-3">
@@ -437,7 +430,6 @@ export default function ExamCameraSetup() {
             <div className="relative bg-gray-200 rounded-xl overflow-hidden aspect-video flex items-center justify-center">
               {camOn ? (
                 <Webcam
-                  ref={webcamRef}
                   audio={micOn}
                   screenshotFormat="image/jpeg"
                   screenshotQuality={0.8}

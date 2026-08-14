@@ -1,10 +1,10 @@
 export interface User {
-  certificates: any[];
-  course_progress: any[];
+  certificates: unknown[];
+  course_progress: unknown[];
   created_at: string;
   deleted_at: string | null;
   email: string;
-  exams: any[];
+  exams: unknown[];
   full_name: string | null;
   github_url: string | null;
   id: number;
@@ -12,11 +12,11 @@ export interface User {
   is_deleted: boolean;
   last_login: string | null;
   linkedin_url: string | null;
-  notifications: any[];
+  notifications: unknown[];
   profile: null;
   role: "TEACHER" | "STUDENT"; 
-  skill_gaps: any[];
-  skills: any[];
+  skill_gaps: unknown[];
+  skills: unknown[];
   track_id: number | null;
   track_name: string | null;
   username: string;

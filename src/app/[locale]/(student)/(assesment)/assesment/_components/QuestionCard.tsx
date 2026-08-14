@@ -1943,17 +1943,6 @@ export default function ExamPage({ dataQuestions }: ExamPageProps) {
     [getAssessmentProgressStorageKey],
   );
 
-  const clearStoredProgress = useCallback(
-    (targetExamId?: number) => {
-      if (targetExamId) {
-        localStorage.removeItem(getAssessmentProgressStorageKey(targetExamId));
-      }
-
-      localStorage.removeItem(LEGACY_ASSESSMENT_PROGRESS_STORAGE_KEY);
-    },
-    [getAssessmentProgressStorageKey],
-  );
-
   useEffect(() => {
     restoreStoredProgress(examId);
   }, [examId, restoreStoredProgress]);

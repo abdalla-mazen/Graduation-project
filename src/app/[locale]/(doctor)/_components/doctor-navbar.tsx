@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Home, UserCircle2 } from "lucide-react";
+import { Home, LogOut, UserCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { usePathname } from "@/i18n/navigation";
 
 export default function DoctorNavbar() {
@@ -48,7 +48,7 @@ export default function DoctorNavbar() {
           </nav>
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden items-center gap-4 md:flex">
           {status === "loading" ? (
             <span className="text-sm text-muted-foreground">Loading...</span>
           ) : (
@@ -56,6 +56,15 @@ export default function DoctorNavbar() {
               {session?.user?.name ? `Dr. ${session.user.name}` : "Guest"}
             </span>
           )}
+
+          <button
+            type="button"
+            onClick={() => signOut({ callbackUrl: "/login" })}
+            className="inline-flex h-10 items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 text-sm font-semibold text-red-600 transition hover:border-red-300 hover:bg-red-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 dark:border-red-900/60 dark:bg-red-950/30 dark:text-red-300 dark:hover:bg-red-950/50"
+          >
+            <LogOut className="h-4 w-4" />
+            <span>Logout</span>
+          </button>
         </div>
       </div>
 
@@ -78,6 +87,15 @@ export default function DoctorNavbar() {
             </Link>
           );
         })}
+
+        <button
+          type="button"
+          onClick={() => signOut({ callbackUrl: "/login" })}
+          className="flex flex-col items-center gap-1 rounded-lg px-3 py-2 text-[11px] font-medium text-red-500 transition hover:bg-red-50 hover:text-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 dark:text-red-300 dark:hover:bg-red-950/40"
+        >
+          <LogOut className="h-5 w-5" />
+          <span>Logout</span>
+        </button>
       </nav>
     </header>
   );

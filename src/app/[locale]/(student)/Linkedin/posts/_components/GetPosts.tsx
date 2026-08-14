@@ -210,7 +210,6 @@ import {
   Building2,
   GraduationCap,
   ExternalLink,
-  Mail,
 } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";

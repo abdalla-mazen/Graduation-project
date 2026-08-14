@@ -1,15 +1,17 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
+import { SkillsResponse } from "../types/skills-user";
+import { apiFetchJson } from "./api-fetch";
 
 export async function getUserSkills() {
-    const session = await getServerSession(authOptions)
-    const res = await fetch(`${process.env.API}/skills/track/${session?.user.trackId}`)
+  const session = await getServerSession(authOptions);
+  const trackId = session?.user.trackId;
 
-    
-    if (!res.ok) {
-        throw new Error ("Faild Fetching")
-    }
-    const payload =await res.json()
+  if (!trackId) {
+    throw new Error("[getUserSkills] Missing user track id.");
+  }
 
-    return payload
+  return apiFetchJson<SkillsResponse>(`/skills/track/${trackId}`, {
+    context: "getUserSkills",
+  });
 }

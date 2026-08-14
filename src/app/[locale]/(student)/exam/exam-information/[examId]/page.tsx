@@ -6,6 +6,7 @@ import { useSubmitExam } from "../_hooks/use-exam-submit";
 import { useParams, useRouter } from "next/navigation";
 import { ExamSubmitPayload } from "@/lib/types/exam-submit";
 import { Link } from "@/i18n/navigation";
+import { ExamResponse, Question, QuestionOption } from "@/lib/types/exam-questions";
 
 type AnswerMap = {
   [questionId: number]: number;
@@ -29,7 +30,7 @@ export default function Page() {
   useEffect(() => {
     if (!isNaN(examId)) {
       mutate(examId, {
-        onSuccess: (res: any) => {
+        onSuccess: (res: ExamResponse) => {
           setTimeLeft(res.remaining_seconds || 0);
         },
       });
@@ -130,7 +131,7 @@ export default function Page() {
 
         {/* QUESTIONS */}
         <div className="space-y-6">
-          {data?.questions?.map((q: any, index: number) => (
+          {data?.questions?.map((q: Question, index: number) => (
             <div
               key={q.id}
               className="bg-white p-5 rounded-2xl shadow border"
@@ -140,7 +141,7 @@ export default function Page() {
               </h2>
 
               <div className="space-y-3">
-                {q.options.map((opt: any) => {
+                {q.options.map((opt: QuestionOption) => {
                   const selected = answers[q.id] === opt.id;
 
                   return (

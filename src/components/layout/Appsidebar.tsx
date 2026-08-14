@@ -9,13 +9,11 @@ import {
   LogOut,
   House,
   FileUser,
-  Album,
   Folder,
   BriefcaseBusiness,
   Linkedin,
   PencilRuler,
   Award,
-  MessageCircleQuestionMark,
 } from "lucide-react";
 
 import {

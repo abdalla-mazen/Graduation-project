@@ -123,12 +123,12 @@ export default function StudentPathForm({
         target_track_id: String(session.user.trackId ?? ""),
       });
     }
-  }, [session]);
+  }, [form, session]);
 
   // ---------- لما الـ year تتغير، reset الـ semester ----------
   useEffect(() => {
     form.setValue("current_semester", "");
-  }, [selectedYear]);
+  }, [form, selectedYear]);
 
   useEffect(() => {
     console.log("session now:", session);

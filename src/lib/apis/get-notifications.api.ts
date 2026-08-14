@@ -1,22 +1,27 @@
-
-
 import getToken from "../utils/get-token";
 
 export async function getNotifications() {
-    const token = await getToken()
-    const res = await fetch(`${process.env.API}/notifications`,{
-        cache :"no-store" ,
-        method : "GET" ,
-        headers: {
+  if (!process.env.API) {
+    return { notifications: [] };
+  }
+
+  const token = await getToken();
+  if (!token?.accessToken) {
+    return { notifications: [] };
+  }
+
+  const res = await fetch(`${process.env.API}/notifications`, {
+    cache: "no-store",
+    method: "GET",
+    headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token?.accessToken}`,
     },
-})
-    const payload =await res.json()
+  });
+  const payload = await res.json();
 
-    if (!res.ok) {
-        throw new Error ("Failed Fetching")
-    }
-    return payload
-
+  if (!res.ok) {
+    return { notifications: [] };
+  }
+  return payload;
 }
